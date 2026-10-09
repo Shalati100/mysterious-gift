@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mysterious Gift 🎁</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: radial-gradient(circle at top, #44216b, #100b24 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 520px;
+    padding: 30px 20px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #ffd978;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #e3d9f7;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.panel {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,217,120,0.5);
+    border-radius: 22px;
+    padding: 25px 18px;
+    box-shadow: 0 0 35px rgba(180,100,255,0.18);
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #c9a8ff;
+    font-size: 16px;
+    margin: 12px 0;
+    background: #fff;
+    color: #25143d;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    background: #ffd978;
+    color: #25143d;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+    transform: scale(1.04);
+    background: #ffe8a9;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#giftArea {
+    margin-top: 28px;
+}
+
+.gift-box {
+    position: relative;
+    width: 180px;
+    height: 155px;
+    margin: 45px auto 25px;
+    cursor: pointer;
+    outline: none;
+}
+
+.box-body {
+    position: absolute;
+    width: 180px;
+    height: 115px;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px 5px 12px 12px;
+    background: linear-gradient(135deg, #e52e77, #a90d4e);
+    box-shadow: 0 15px 30px #0006;
+}
+
+.box-body::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 28px;
+    background: #ffd978;
+    left: 76px;
+}
+
+.box-lid {
+    position: absolute;
+    width: 200px;
+    height: 35px;
+    left: -10px;
+    top: 15px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #ff65a0, #c51159);
+    box-shadow: 0 5px 12px #0005;
+    z-index: 2;
+    transition: transform 0.8s ease;
+}
+
+.box-lid::before {
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 35px;
+    left: 86px;
+    background: #ffd978;
+}
+
+.bow {
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    top: -13px;
+    left: 59px;
+    border: 9px solid #ffd978;
+    border-radius: 50% 50% 0 50%;
+    transform: rotate(-25deg);
+}
+
+.bow::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    border: 9px solid #ffd978;
+    border-radius: 50% 50% 50% 0;
+    left: 16px;
+    top: -8px;
+    transform: rotate(55deg);
+}
+
+.gift-box.open .box-lid {
+    transform: translate(15px, -75px) rotate(18deg);
+}
+
+.gift-box.open {
+    animation: glow 1s ease-in-out;
+}
+
+@keyframes glow {
+    50% {
+        filter: drop-shadow(0 0 25px #ffd978);
+    }
+}
+
+#instruction {
+    color: #ffd978;
+    font-weight: bold;
+}
+
+#result {
+    margin: 20px 0;
+    padding: 20px 10px;
+    border-radius: 15px;
+    background: rgba(255,217,120,0.12);
+    border: 1px dashed #ffd978;
+}
+
+#recipient {
+    font-size: 32px;
+    color: #ffd978;
+    overflow-wrap: anywhere;
+    margin: 12px 0;
+}
+
+.warning {
+    font-size: 12px;
+    color: #d4c7e8;
+    margin-top: 25px;
+    line-height: 1.5;
+}
+
+#message {
+    color: #ffb9d4;
+    min-height: 20px;
+    font-size: 14px;
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 29px;
+    }
+
+    .panel {
+        padding: 22px 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+    <h1>🎁 Mysterious Gift 🎁</h1>
+
+    <p class="subtitle">
+        A little mystery, a special surprise!<br>
+        Find out who you will be gifting this time.
+    </p>
+
+    <section class="panel" id="entryPanel">
+        <h2>Who are you? 🌙</h2>
+        <p>Enter your name to unlock your secret gift assignment.</p>
+
+        <form id="nameForm">
+            <input
+                type="text"
+                id="nameInput"
+                placeholder="Enter your name..."
+                autocomplete="off"
+                required
+            >
+            <button type="submit">Reveal My Gift 🎀</button>
+        </form>
+
+        <p id="message" aria-live="polite"></p>
+    </section>
+
+    <section id="giftArea" class="panel hidden">
+        <h2 id="welcome"></h2>
+
+        <p class="subtitle">
+            Your secret assignment is inside this box.
+        </p>
+
+        <p id="instruction">Tap the gift box to open it!</p>
+
+        <div
+            class="gift-box"
+            id="giftBox"
+            role="button"
+            tabindex="0"
+            aria-label="Open your mysterious gift box"
+        >
+            <div class="box-lid">
+                <div class="bow"></div>
+            </div>
+            <div class="box-body"></div>
+        </div>
+
+        <div id="result" class="hidden" aria-live="polite">
+            <p>Your secret gift recipient is...</p>
+            <div id="recipient"></div>
+            <p>🤫 Keep it a secret!</p>
+        </div>
+
+        <button id="resetButton" class="hidden">
+            Done
+        </button>
+
+        <p class="warning">
+            This is a secret assignment. Please do not tell anyone
+            who you have been assigned!
+        </p>
+    </section>
+
+</main>
+
+<script>
+const assignments = {
+    "shalati": "Christina",
+    "maggy": "Mbhoni",
+    "glory": "Shihluke",
+    "patience": "Glory",
+    "mashudu": "Shalati",
+    "julie": "Aggy",
+    "christina": "Patience",
+    "aggy": "Julie",
+    "mbhoni": "Maggy",
+    "shihluke": "Mashudu"
+};
+
+const nameForm = document.getElementById("nameForm");
+const nameInput = document.getElementById("nameInput");
+const entryPanel = document.getElementById("entryPanel");
+const giftArea = document.getElementById("giftArea");
+const giftBox = document.getElementById("giftBox");
+const welcome = document.getElementById("welcome");
+const instruction = document.getElementById("instruction");
+const result = document.getElementById("result");
+const recipient = document.getElementById("recipient");
+const message = document.getElementById("message");
+const resetButton = document.getElementById("resetButton");
+
+let currentRecipient = "";
+let opened = false;
+
+nameForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const enteredName = nameInput.value.trim().toLowerCase();
+
+    if (!assignments[enteredName]) {
+        message.textContent =
+            "That name is not on the guest list. Please try again.";
+        return;
+    }
+
+    currentRecipient = assignments[enteredName];
+    opened = false;
+
+    welcome.textContent =
+        "Welcome, " + capitalize(enteredName) + "! ✨";
+
+    message.textContent = "";
+    entryPanel.classList.add("hidden");
+    giftArea.classList.remove("hidden");
+
+    giftBox.classList.remove("open");
+    result.classList.add("hidden");
+    resetButton.classList.add("hidden");
+
+    instruction.textContent = "Tap the gift box to open it!";
+});
+
+function capitalize(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function openGift() {
+    if (opened) return;
+
+    opened = true;
+    giftBox.classList.add("open");
+
+    instruction.textContent = "✨ Your secret is revealed! ✨";
+    recipient.textContent = currentRecipient;
+
+    result.classList.remove("hidden");
+    resetButton.classList.remove("hidden");
+}
+
+giftBox.addEventListener("click", openGift);
+
+giftBox.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openGift();
+    }
+});
+
+resetButton.addEventListener("click", function() {
+    currentRecipient = "";
+    opened = false;
+    nameInput.value = "";
+
+    giftArea.classList.add("hidden");
+    entryPanel.classList.remove("hidden");
+
+    nameInput.focus();
+});
+</script>
+</body>
+</html>
